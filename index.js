@@ -12,13 +12,13 @@ const subtract = (x, y) => {
 }
 
 //Regex for any operand with at least 1 digit preceding it
-const opReg = /\d+[\*\/\+\-]\d+/;
+const opReg = /\d+ [\*\/\+\-] \d+/;
 
 
-const multReg = /(\d*(?:\.\d+)?)\*(\d*(?:\.\d+)?)/g;
-const divReg = /(\d*(?:\.\d+)?)\/(\d*(?:\.\d+)?)/g;
-const addReg = /(\d*(?:\.\d+)?)\+(\d*(?:\.\d+)?)/g;
-const subReg = /(\d*(?:\.\d+)?)\-(\d*(?:\.\d+)?)/g;
+const multReg = /(\d*(?:\.\d+)?) \* (\d*(?:\.\d+)?)/g;
+const divReg = /(\d*(?:\.\d+)?) \/ (\d*(?:\.\d+)?)/g;
+const addReg = /(\d*(?:\.\d+)?) \+ (\d*(?:\.\d+)?)/g;
+const subReg = /(\d*(?:\.\d+)?) \- (\d*(?:\.\d+)?)/g;
 
 const display = document.querySelector('.display');
 const subDisplay = document.querySelector('.sub-display');
@@ -35,9 +35,16 @@ const populateDisplay = (e) => {
     //displayValue holds full expression
     //display.innerText holds the last float
     [displayValue, display.innerText] = [displayValue, display.innerText].map((ele) => {
-        return ele = (ele === '0' && e.target.className === 'number')
-                   ? e.target.innerText
-                   : (ele + e.target.innerText);
+        if(e.target.className === 'number' || e.target.className === 'number') {
+            if(e.target.className === 'number' && ele === '0') {
+                ele = e.target.innerText;
+            } else {
+                ele = ele + e.target.innerText;
+            }
+        } else {
+            ele = ele + ' ' + e.target.innerText + ' ';
+        }
+        return ele;
     })
     //When an operator is used, the display text moves to the subdisplay and the display is cleared
     if(e.target.classList.contains('op')) {
@@ -71,7 +78,7 @@ const performCalculation = () => {
         }
     }
     //Shows final result on calculator displays
-    subDisplay.innerText = subDisplay.innerText + display.innerText;
+    subDisplay.innerText = subDisplay.innerText + ' ' + display.innerText + ' =';
     display.innerText = displayValue;
 }
 
