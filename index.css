@@ -4,11 +4,11 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 400px;
+    max-width: 300px;
 }
 .calculator {
     width: 100%;
-    height: 600px;
+    height: 500px;
     background: linear-gradient(to top, #434053, #727177);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -36,7 +36,10 @@ body {
     font-size: 2rem;
 }
 .clear {
-    grid-area: 3 / 1 / span 1 / span 3;
+    grid-area: 3 / 1 / span 1 / span 2;
+}
+.delete {
+    grid-area: 3 / 3 / span 1 / span 1;
 }
 .numbers-grid {
     grid-area: 4 / 1 / span 4 / span 3;
@@ -44,7 +47,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     /* grid-gap: 20px; */
 }
-.operations-grid {
+.operands-grid {
     grid-area: 3 / 4 / span 4 / span 1;
     display: grid;
     /* grid-gap: 20px; */
@@ -64,13 +67,14 @@ button {
 }
 
 .clear,
+.delete, 
 .equals,
 .numbers-grid button, 
-.operations-grid button {
+.operands-grid button {
     margin: 10px;
     border-radius: 5px;
 }
-.operations-grid button {
+.operands-grid button {
     background-color: #9e9e9e;
     color: white;
 }
